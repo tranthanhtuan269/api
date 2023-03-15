@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/privacy-policy', function () {
+    return view('policy');
+});
+
+Route::get('/terms-of-use', function () {
+    return view('term');
+});
+
 Route::get('/setup', function(){
     $credentials = [
         'email' => 'admin@admin.com',
