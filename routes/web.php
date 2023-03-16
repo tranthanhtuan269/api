@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,10 @@ Route::get('/privacy-policy', function () {
 Route::get('/terms-of-use', function () {
     return view('term');
 });
+
+Route::get('/test', [HomeController::class, 'test']);
+
+
 
 Route::get('/setup', function(){
     $credentials = [

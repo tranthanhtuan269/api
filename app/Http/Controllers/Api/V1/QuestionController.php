@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Question;
+use App\Models\QQuestion;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\QuestionResource;
 use App\Http\Resources\V1\QuestionCollection;
+use Illuminate\Support\Facades\Cache;
 
 class QuestionController extends Controller
 {
@@ -16,7 +17,12 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return new QuestionCollection(Question::all());
+        // Cache::forget('question_collection');
+        $question_collection = Cache::rememberForever('question_collection', function () {
+            return json_encode(new QuestionCollection(QQuestion::all()));
+        });
+        // dd($question_collection);
+        return $question_collection;
     }
 
     /**
@@ -38,7 +44,7 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Question $question)
+    public function show(QQuestion $question)
     {
         // return $question;
         return new QuestionResource($question);

@@ -17,9 +17,12 @@ class QuestionResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id' => $this->id,
-            'content' => $this->content,
-            'is_true' => $this->is_true,
-            'answers' => $this->answers
+            'category' => $this->category,
+            'type' => $this->type,
+            'difficulty' => $this->difficulty,
+            'question' => $this->question,
+            'correct_answer' => $this->correct_answer,
+            'incorrect_answers' => $this->answers
         ];
     }
 }
